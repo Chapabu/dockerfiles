@@ -219,7 +219,25 @@ services:
     image: quay.io/continuouspipe/php5.6-nginx:latest
     depends_on:
       - ubuntu
-      
+
+  python27:
+    build:
+      context: ./python/
+      args:
+        PYTHON_VERSION: 2.7.13
+    image: quay.io/continuouspipe/python2.7:latest
+    # depends_on:
+    #   - ubuntu
+
+  python36:
+    build:
+      context: ./python/
+      args:
+        PYTHON_VERSION: 3.6.0
+    image: quay.io/continuouspipe/python3.6:latest
+    # depends_on:
+    #   - ubuntu
+
   scala_sbt:
     build:
       context: ./scala-base/1.0/
