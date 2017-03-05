@@ -42,5 +42,9 @@ RUN [ -e easy_install ] || ln -s easy_install-* easy_install \
   && ln -s python3-config python-config \
   && ln -s pip3 pip
 
+# Cleanup.
+RUN rm /tmp/Python-${PYTHON_VERSION}.tgz \
+  && rm -rf /tmp/Python-${PYTHON_VERSION}
+
 # End in app directory.
 WORKDIR /app
