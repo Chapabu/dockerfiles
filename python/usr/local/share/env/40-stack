@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+export WORK_DIRECTORY=${WORK_DIRECTORY:-/app}
+export REQUIREMENTS_DIRECTORY=${REQUIREMENTS_DIRECTORY:-$WORK_DIRECTORY}
+
+# There's a 99% change that people will have used requirements.txt, but we
+# should account for the 1%.
+export REQUIREMENTS_FILE=${REQUIREMENTS_DIRECTORY:-requirements.txt}
