@@ -32,19 +32,23 @@ RUN ./configure \
   && make \
   && make install
 
-# Setup symlinks.
+# Setup symlinks if Python 3 files exist.
 WORKDIR /usr/local/bin
 
 RUN [ -e easy_install ] || ln -s easy_install-* easy_install \
-  && ln -s idle3 idle \
-  && ln -s pydoc3 pydoc \
-  && ln -s python3 python \
-  && ln -s python3-config python-config \
-  && ln -s pip3 pip
+  && [ ! -e python3 ] || ln -sf python3 python \
+  && [ ! -e idle3 ] || ln -sf idle3 idle \
+  && [ ! -e pydoc3 ] || ln -sf pydoc3 pydoc \
+  && [ ! -e python3 ] || ln -sf python3 python \
+  && [ ! -e pip3 ] || ln -sf pip3 pip
 
 # Cleanup.
 RUN rm /tmp/Python-${PYTHON_VERSION}.tgz \
   && rm -rf /tmp/Python-${PYTHON_VERSION}
+
+USER root
+
+COPY ./usr/ /usr/
 
 # End in app directory.
 WORKDIR /app
